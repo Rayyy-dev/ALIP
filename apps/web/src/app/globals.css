@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: #0f172a;
+    --background: #131b2e;
     --foreground: #f1f5f9;
-    --surface: #1e293b;
-    --surface-elevated: #283548;
-    --surface-hover: #334155;
-    --surface-active: #3b4d66;
+    --surface: #1c2a40;
+    --surface-elevated: #243450;
+    --surface-hover: #2d3f5c;
+    --surface-active: #375070;
 
     --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --text-tertiary: #94a3b8;
-    --text-disabled: #64748b;
+    --text-secondary: #dce4ef;
+    --text-tertiary: #a3b3c9;
+    --text-disabled: #728196;
 
-    --border-subtle: #293548;
-    --border-default: #334155;
-    --border-strong: #475569;
+    --border-subtle: #253850;
+    --border-default: #304a65;
+    --border-strong: #3e5e7f;
 
     --accent: #6366f1;
     --accent-light: #818cf8;
-    --accent-glow: rgba(99, 102, 241, 0.18);
+    --accent-glow: rgba(99, 102, 241, 0.22);
 
     --danger: #f43f5e;
     --warning: #f59e0b;
@@ -51,17 +51,17 @@
     @apply relative overflow-hidden rounded-xl;
     background: var(--surface);
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.18);
     transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
   }
   .card::before {
     content: '';
     @apply absolute top-0 left-0 right-0 h-px pointer-events-none;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
   }
   .card:hover {
     border-color: var(--border-default);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25), 0 0 0 1px rgba(99, 102, 241, 0.05);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 0 0 1px rgba(99, 102, 241, 0.06);
   }
 
   .card-header {
@@ -95,24 +95,24 @@
     transition: all 150ms ease;
   }
   .badge-success {
-    background: rgba(16, 185, 129, 0.12);
+    background: rgba(16, 185, 129, 0.15);
     color: #6ee7b7;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.25);
   }
   .badge-warning {
-    background: rgba(245, 158, 11, 0.12);
+    background: rgba(245, 158, 11, 0.15);
     color: #fcd34d;
-    border: 1px solid rgba(245, 158, 11, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.25);
   }
   .badge-danger {
-    background: rgba(244, 63, 94, 0.12);
+    background: rgba(244, 63, 94, 0.15);
     color: #fda4af;
-    border: 1px solid rgba(244, 63, 94, 0.2);
+    border: 1px solid rgba(244, 63, 94, 0.25);
   }
   .badge-info {
-    background: rgba(99, 102, 241, 0.12);
+    background: rgba(99, 102, 241, 0.15);
     color: #c7d2fe;
-    border: 1px solid rgba(99, 102, 241, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.25);
   }
 
   /* ===== BUTTONS ===== */
@@ -178,7 +178,7 @@
 
   .select {
     @apply input appearance-none pr-8;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23a3b3c9' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
     background-position: right 0.5rem center;
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
@@ -190,7 +190,7 @@
   .table thead {
     @apply text-xs uppercase tracking-wider;
     color: var(--text-tertiary);
-    background: rgba(15, 23, 42, 0.5);
+    background: rgba(19, 27, 46, 0.6);
     border-bottom: 1px solid var(--border-default);
   }
   .table th { @apply px-5 py-3 font-semibold; }
@@ -199,7 +199,7 @@
     border-bottom: 1px solid var(--border-subtle);
     transition: background 150ms ease;
   }
-  .table tbody tr:hover { background: rgba(51, 65, 85, 0.4); }
+  .table tbody tr:hover { background: rgba(45, 63, 92, 0.35); }
   .table tbody tr:last-child { border-bottom: none; }
 }
 

@@ -41,32 +41,32 @@ export function LogVolumeChart({
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#253850" />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          tick={{ fontSize: 11, fill: '#a3b3c9' }}
           tickLine={false}
-          axisLine={{ stroke: '#1e293b' }}
+          axisLine={{ stroke: '#253850' }}
         />
         <YAxis
-          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          tick={{ fontSize: 11, fill: '#a3b3c9' }}
           tickLine={false}
           axisLine={false}
           allowDecimals={false}
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#1e293b',
-            border: '1px solid #334155',
+            backgroundColor: '#253850',
+            border: '1px solid #304a65',
             borderRadius: '8px',
             boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)',
             color: '#f8fafc',
           }}
-          labelStyle={{ color: '#94a3b8', fontSize: 11 }}
+          labelStyle={{ color: '#a3b3c9', fontSize: 11 }}
           cursor={{ fill: 'rgba(255,255,255,0.03)' }}
         />
         <Legend
-          wrapperStyle={{ color: '#94a3b8', fontSize: 11, paddingTop: 8 }}
+          wrapperStyle={{ color: '#a3b3c9', fontSize: 11, paddingTop: 8 }}
         />
         <Bar
           dataKey="infoCount"

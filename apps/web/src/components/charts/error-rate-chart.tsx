@@ -41,15 +41,15 @@ export function ErrorRateChart({
             <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#253850" />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          tick={{ fontSize: 11, fill: '#a3b3c9' }}
           tickLine={false}
-          axisLine={{ stroke: '#1e293b' }}
+          axisLine={{ stroke: '#253850' }}
         />
         <YAxis
-          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          tick={{ fontSize: 11, fill: '#a3b3c9' }}
           tickLine={false}
           axisLine={false}
           tickFormatter={(value) => `${value}%`}
@@ -57,13 +57,13 @@ export function ErrorRateChart({
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#1e293b',
-            border: '1px solid #334155',
+            backgroundColor: '#253850',
+            border: '1px solid #304a65',
             borderRadius: '8px',
             boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)',
             color: '#f8fafc',
           }}
-          labelStyle={{ color: '#94a3b8', fontSize: 11 }}
+          labelStyle={{ color: '#a3b3c9', fontSize: 11 }}
           itemStyle={{ color: '#fb7185' }}
           formatter={(value: number) => [formatPercent(value), 'Error Rate']}
         />
@@ -74,7 +74,7 @@ export function ErrorRateChart({
           strokeWidth={2.5}
           fill="url(#rateGradient)"
           dot={false}
-          activeDot={{ r: 5, fill: '#f43f5e', stroke: '#1e293b', strokeWidth: 2 }}
+          activeDot={{ r: 5, fill: '#f43f5e', stroke: '#253850', strokeWidth: 2 }}
           animationBegin={0}
           animationDuration={1200}
           animationEasing="ease-out"
