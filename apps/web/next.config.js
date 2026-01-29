@@ -1,9 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  transpilePackages: ['@alip/shared-types'],
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client'],
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;

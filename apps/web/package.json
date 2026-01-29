@@ -10,7 +10,6 @@
     "clean": "rimraf .next"
   },
   "dependencies": {
-    "@alip/shared-types": "*",
     "clsx": "^2.0.0",
     "date-fns": "^3.0.6",
     "lucide-react": "^0.303.0",
