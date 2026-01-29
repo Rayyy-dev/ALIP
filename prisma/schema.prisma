@@ -1,0 +1,128 @@
+// ALIP - Automated Log Intelligence Platform
+// Prisma Schema Definition (SQLite Compatible)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// MODELS
+// ============================================================================
+
+/// Individual log entry from application sources
+model Log {
+  id                String       @id @default(cuid())
+  timestamp         DateTime     /// When the log was generated at source
+  level             String       /// Severity level: INFO, WARN, ERROR
+  service           String       /// Source service/application name
+  message           String       /// Original log message
+  normalizedMessage String       /// Message with IDs/timestamps removed for grouping
+  stackTrace        String?      /// Optional stack trace for errors
+  fingerprint       String       /// Hash for grouping similar logs
+
+  // Relationship to error group
+  errorGroupId      String?
+  errorGroup        ErrorGroup?  @relation(fields: [errorGroupId], references: [id], onDelete: SetNull)
+
+  createdAt         DateTime     @default(now())
+
+  // Indexes for common query patterns
+  @@index([timestamp])
+  @@index([fingerprint])
+  @@index([service])
+  @@index([level])
+  @@index([errorGroupId])
+}
+
+/// Grouped error pattern representing similar errors
+model ErrorGroup {
+  id                String   @id @default(cuid())
+  fingerprint       String   @unique /// Unique hash of normalized message + service + level
+  normalizedMessage String   /// Template of the error message
+  service           String   /// Source service
+  level             String   /// Error severity: WARN, ERROR
+  occurrenceCount   Int      @default(1) /// Total number of occurrences
+  firstSeen         DateTime /// When this error was first seen
+  lastSeen          DateTime /// Most recent occurrence
+  status            String   @default("ACTIVE") /// ACTIVE, RESOLVED, IGNORED
+
+  // Related logs
+  logs              Log[]
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Indexes for filtering and sorting
+  @@index([service])
+  @@index([level])
+  @@index([status])
+  @@index([lastSeen])
+  @@index([occurrenceCount])
+}
+
+/// Aggregated metrics for a time bucket
+model ErrorTrend {
+  id           String   @id @default(cuid())
+  bucketStart  DateTime /// Start of the time bucket
+  bucketType   String   /// HOUR or DAY granularity
+  service      String?  /// Service name, null for all-services aggregate
+  totalLogs    Int      @default(0)
+  infoCount    Int      @default(0)
+  warnCount    Int      @default(0)
+  errorCount   Int      @default(0)
+  errorRate    Float    @default(0) /// Percentage: errorCount / totalLogs * 100
+
+  createdAt    DateTime @default(now())
+
+  // Unique constraint for upsert operations
+  @@unique([bucketStart, bucketType, service])
+  @@index([bucketStart])
+  @@index([bucketType])
+  @@index([service])
+}
+
+/// Configurable alert rule definition
+model AlertRule {
+  id            String   @id @default(cuid())
+  name          String   /// Human-readable rule name
+  description   String?  /// Optional description
+  ruleType      String   /// Type of alert rule: ERROR_COUNT_THRESHOLD, SPIKE_DETECTION, NEW_ERROR_TYPE
+  threshold     Int      /// Threshold value for triggering
+  windowMinutes Int      @default(60) /// Time window for evaluation
+  service       String?  /// Specific service or null for all
+  enabled       Boolean  @default(true)
+
+  // Related alerts
+  alerts        Alert[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([enabled])
+  @@index([ruleType])
+  @@index([service])
+}
+
+/// Triggered alert instance
+model Alert {
+  id          String    @id @default(cuid())
+  alertRuleId String
+  alertRule   AlertRule @relation(fields: [alertRuleId], references: [id], onDelete: Cascade)
+  status      String    @default("ACTIVE") /// ACTIVE, RESOLVED, ACKNOWLEDGED
+  message     String    /// Human-readable alert message
+  metadata    String?   /// JSON string with additional context data
+  triggeredAt DateTime  @default(now())
+  resolvedAt  DateTime?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status])
+  @@index([triggeredAt])
+  @@index([alertRuleId])
+}

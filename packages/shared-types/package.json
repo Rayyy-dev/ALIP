@@ -1,0 +1,19 @@
+{
+  "name": "@alip/shared-types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types for ALIP",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.0"
+  }
+}
