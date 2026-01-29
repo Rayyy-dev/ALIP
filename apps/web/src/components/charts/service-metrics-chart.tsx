@@ -48,10 +48,10 @@ export function ServiceMetricsChart({
         layout="vertical"
         margin={{ top: 10, right: 10, left: 80, bottom: 0 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#253850" horizontal={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#2e3e55" horizontal={false} />
         <XAxis
           type="number"
-          tick={{ fontSize: 11, fill: '#a3b3c9' }}
+          tick={{ fontSize: 11, fill: '#b0bdd0' }}
           tickLine={false}
           axisLine={false}
           tickFormatter={(value) =>
@@ -61,20 +61,20 @@ export function ServiceMetricsChart({
         <YAxis
           type="category"
           dataKey="service"
-          tick={{ fontSize: 11, fill: '#dce4ef' }}
+          tick={{ fontSize: 11, fill: '#e0e6ef' }}
           tickLine={false}
           axisLine={false}
           width={70}
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#253850',
-            border: '1px solid #304a65',
+            backgroundColor: '#2e3e55',
+            border: '1px solid #3a4e6a',
             borderRadius: '8px',
             boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)',
             color: '#f8fafc',
           }}
-          labelStyle={{ color: '#a3b3c9', fontSize: 11 }}
+          labelStyle={{ color: '#b0bdd0', fontSize: 11 }}
           cursor={{ fill: 'rgba(255,255,255,0.03)' }}
           formatter={(value: number) => [
             metric === 'errorRate' ? `${value.toFixed(1)}%` : formatNumber(value),

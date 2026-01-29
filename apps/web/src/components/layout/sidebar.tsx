@@ -9,8 +9,8 @@ import {
   TrendingUp,
   Bell,
   Activity,
-  PanelLeftClose,
-  PanelLeftOpen,
+  ChevronsLeft,
+  ChevronsRight,
 } from 'lucide-react';
 
 const navigation = [
@@ -22,7 +22,7 @@ const navigation = [
 
 interface SidebarProps {
   collapsed: boolean;
-  onToggle: () => void; // collapses the sidebar
+  onToggle: () => void;
 }
 
 export function Sidebar({ collapsed, onToggle }: SidebarProps) {
@@ -31,11 +31,11 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   return (
     <div
       className={cn(
-        'fixed top-0 left-0 flex flex-col h-screen bg-[#172035] border-r border-[--border-subtle] z-30 transition-[width] duration-200 ease-in-out overflow-hidden',
+        'fixed top-0 left-0 flex flex-col h-screen bg-[--surface] border-r border-[--border-subtle] z-30 transition-[width] duration-200 ease-in-out overflow-hidden',
         collapsed ? 'w-16' : 'w-64'
       )}
     >
-      {/* Header: Logo + Toggle */}
+      {/* Header */}
       <div className="flex items-center justify-between border-b border-[--border-subtle] py-4 px-3 shrink-0">
         <div className="flex items-center gap-3 min-w-0">
           <div className="shrink-0 p-2 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg shadow-glow-sm">
@@ -48,15 +48,13 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
             </div>
           )}
         </div>
-        {!collapsed && (
-          <button
-            onClick={onToggle}
-            className="shrink-0 p-1.5 rounded-md text-[--text-disabled] hover:text-[--text-secondary] hover:bg-white/[0.06] transition-colors"
-            title="Collapse"
-          >
-            <PanelLeftClose className="w-4 h-4" />
-          </button>
-        )}
+        <button
+          onClick={onToggle}
+          className="shrink-0 p-1.5 rounded-md text-[--text-disabled] hover:text-[--text-secondary] hover:bg-white/[0.06] transition-colors"
+          title={collapsed ? 'Expand' : 'Collapse'}
+        >
+          {collapsed ? <ChevronsRight className="w-4 h-4" /> : <ChevronsLeft className="w-4 h-4" />}
+        </button>
       </div>
 
       {/* Navigation */}

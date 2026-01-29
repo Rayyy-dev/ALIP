@@ -41,28 +41,28 @@ export function ErrorTimelineChart({
             <stop offset="95%" stopColor="#f43f5e" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" stroke="#253850" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#2e3e55" />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 11, fill: '#a3b3c9' }}
+          tick={{ fontSize: 11, fill: '#b0bdd0' }}
           tickLine={false}
-          axisLine={{ stroke: '#253850' }}
+          axisLine={{ stroke: '#2e3e55' }}
         />
         <YAxis
-          tick={{ fontSize: 11, fill: '#a3b3c9' }}
+          tick={{ fontSize: 11, fill: '#b0bdd0' }}
           tickLine={false}
           axisLine={false}
           allowDecimals={false}
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: '#253850',
-            border: '1px solid #304a65',
+            backgroundColor: '#2e3c52',
+            border: '1px solid #3a4e6a',
             borderRadius: '8px',
             boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)',
             color: '#f8fafc',
           }}
-          labelStyle={{ color: '#a3b3c9', fontSize: 11 }}
+          labelStyle={{ color: '#b0bdd0', fontSize: 11 }}
           itemStyle={{ color: '#fb7185' }}
           formatter={(value: number) => [value, 'Errors']}
         />

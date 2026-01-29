@@ -59,11 +59,11 @@ module.exports = {
           900: '#064e3b',
         },
         surface: {
-          deep: '#131b2e',
-          DEFAULT: '#1c2a40',
-          elevated: '#243450',
-          hover: '#2d3f5c',
-          active: '#375070',
+          deep: '#1a2332',
+          DEFAULT: '#243040',
+          elevated: '#2e3c52',
+          hover: '#384a62',
+          active: '#435874',
         },
       },
       boxShadow: {
