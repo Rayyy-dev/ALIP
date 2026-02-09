@@ -1,12 +1,12 @@
 // ALIP - Automated Log Intelligence Platform
-// Prisma Schema Definition (SQLite Compatible)
+// Prisma Schema Definition
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
