@@ -45,10 +45,6 @@ coverage/
 # Prisma
 prisma/migrations/**/migration_lock.toml
 
-# Claude
-.claude/
-
 # Misc
 .cache/
 *.tsbuildinfo
-nul
