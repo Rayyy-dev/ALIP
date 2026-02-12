@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx prisma generate && npm run build --workspace=packages/shared-types && npm run build --workspace=apps/web",
+  "buildCommand": "npx prisma generate --schema=./prisma/schema.prisma && npm run build --workspace=packages/shared-types && npm run build --workspace=apps/web",
   "outputDirectory": "apps/web/.next",
   "installCommand": "npm install",
   "framework": "nextjs"
