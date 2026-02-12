@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { withErrorHandling, paginatedResponse, parsePaginationParams } from '@/lib/api-utils';
 import { alertService } from '@/lib/services/alert.service';
-import { AlertQueryParams } from '@alip/shared-types';
+import type { AlertQueryParams } from '@alip/shared-types';
 
 export const GET = withErrorHandling(async (req: NextRequest) => {
   const sp = req.nextUrl.searchParams;

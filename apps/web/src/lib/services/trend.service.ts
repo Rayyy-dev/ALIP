@@ -1,4 +1,4 @@
-import { TrendQueryParams, TimeSeriesPoint, ServiceMetrics, OverviewStats, PeriodComparison } from '@alip/shared-types';
+import type { TrendQueryParams, TimeSeriesPoint, ServiceMetrics, OverviewStats, PeriodComparison } from '@alip/shared-types';
 import { trendRepository, BucketType } from '@/lib/repositories/trend.repository';
 import { logRepository, LogLevel } from '@/lib/repositories/log.repository';
 import { errorGroupRepository } from '@/lib/repositories/error-group.repository';

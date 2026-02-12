@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { withErrorHandling, successResponse } from '@/lib/api-utils';
 import { trendService } from '@/lib/services/trend.service';
-import { TrendQueryParams } from '@alip/shared-types';
+import type { TrendQueryParams } from '@alip/shared-types';
 
 export const GET = withErrorHandling(async (req: NextRequest) => {
   const sp = req.nextUrl.searchParams;

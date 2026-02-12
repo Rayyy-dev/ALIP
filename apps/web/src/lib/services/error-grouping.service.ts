@@ -1,4 +1,4 @@
-import { ErrorGroupQueryParams, ErrorGroupUpdateInput } from '@alip/shared-types';
+import type { ErrorGroupQueryParams, ErrorGroupUpdateInput } from '@alip/shared-types';
 import { errorGroupRepository, ErrorGroupStatus } from '@/lib/repositories/error-group.repository';
 import { NotFoundError } from '@/lib/errors';
 import { logger } from '@/lib/logger';

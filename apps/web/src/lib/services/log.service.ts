@@ -1,4 +1,4 @@
-import { LogInput, BatchLogInput, LogQueryParams, LogStats } from '@alip/shared-types';
+import type { LogInput, BatchLogInput, LogQueryParams, LogStats } from '@alip/shared-types';
 import { logRepository, LogLevel } from '@/lib/repositories/log.repository';
 import { errorGroupService } from './error-grouping.service';
 import { trendService } from './trend.service';

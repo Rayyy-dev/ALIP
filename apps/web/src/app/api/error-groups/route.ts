@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { withErrorHandling, paginatedResponse, parsePaginationParams } from '@/lib/api-utils';
 import { errorGroupService } from '@/lib/services/error-grouping.service';
-import { ErrorGroupQueryParams } from '@alip/shared-types';
+import type { ErrorGroupQueryParams } from '@alip/shared-types';
 
 export const GET = withErrorHandling(async (req: NextRequest) => {
   const sp = req.nextUrl.searchParams;
