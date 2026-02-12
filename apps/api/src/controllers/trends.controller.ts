@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { BucketType } from '@prisma/client';
+import { BucketType } from '@alip/shared-types';
 import { trendService } from '../services/trend.service';
 import { sendSuccess } from '../utils/response';
 import { TrendQueryParams } from '@alip/shared-types';
