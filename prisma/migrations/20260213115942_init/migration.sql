@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Log" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "timestamp" DATETIME NOT NULL,
+    "id" TEXT NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL,
     "level" TEXT NOT NULL,
     "service" TEXT NOT NULL,
     "message" TEXT NOT NULL,
@@ -9,42 +9,47 @@ CREATE TABLE "Log" (
     "stackTrace" TEXT,
     "fingerprint" TEXT NOT NULL,
     "errorGroupId" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Log_errorGroupId_fkey" FOREIGN KEY ("errorGroupId") REFERENCES "ErrorGroup" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Log_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ErrorGroup" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "fingerprint" TEXT NOT NULL,
     "normalizedMessage" TEXT NOT NULL,
     "service" TEXT NOT NULL,
     "level" TEXT NOT NULL,
     "occurrenceCount" INTEGER NOT NULL DEFAULT 1,
-    "firstSeen" DATETIME NOT NULL,
-    "lastSeen" DATETIME NOT NULL,
+    "firstSeen" TIMESTAMP(3) NOT NULL,
+    "lastSeen" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'ACTIVE',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ErrorGroup_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ErrorTrend" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "bucketStart" DATETIME NOT NULL,
+    "id" TEXT NOT NULL,
+    "bucketStart" TIMESTAMP(3) NOT NULL,
     "bucketType" TEXT NOT NULL,
     "service" TEXT,
     "totalLogs" INTEGER NOT NULL DEFAULT 0,
     "infoCount" INTEGER NOT NULL DEFAULT 0,
     "warnCount" INTEGER NOT NULL DEFAULT 0,
     "errorCount" INTEGER NOT NULL DEFAULT 0,
-    "errorRate" REAL NOT NULL DEFAULT 0,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "errorRate" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "ErrorTrend_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "AlertRule" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
     "ruleType" TEXT NOT NULL,
@@ -52,22 +57,25 @@ CREATE TABLE "AlertRule" (
     "windowMinutes" INTEGER NOT NULL DEFAULT 60,
     "service" TEXT,
     "enabled" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "AlertRule_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Alert" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "alertRuleId" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'ACTIVE',
     "message" TEXT NOT NULL,
     "metadata" TEXT,
-    "triggeredAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "resolvedAt" DATETIME,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "Alert_alertRuleId_fkey" FOREIGN KEY ("alertRuleId") REFERENCES "AlertRule" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "triggeredAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "resolvedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Alert_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -132,3 +140,9 @@ CREATE INDEX "Alert_triggeredAt_idx" ON "Alert"("triggeredAt");
 
 -- CreateIndex
 CREATE INDEX "Alert_alertRuleId_idx" ON "Alert"("alertRuleId");
+
+-- AddForeignKey
+ALTER TABLE "Log" ADD CONSTRAINT "Log_errorGroupId_fkey" FOREIGN KEY ("errorGroupId") REFERENCES "ErrorGroup"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Alert" ADD CONSTRAINT "Alert_alertRuleId_fkey" FOREIGN KEY ("alertRuleId") REFERENCES "AlertRule"("id") ON DELETE CASCADE ON UPDATE CASCADE;
