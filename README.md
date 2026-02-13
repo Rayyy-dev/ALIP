@@ -249,7 +249,7 @@ npx ts-node scripts/generate-spike.ts 100
 
 ```env
 # Database
-DATABASE_URL="postgresql://alip:alip_secret@localhost:5432/alip?schema=public"
+DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/alip?schema=public"
 
 # API Server
 API_PORT=3001
